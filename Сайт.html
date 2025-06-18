@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lobotomy Corporation – Аномалии</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen font-sans">
+  <header class="bg-red-800 p-4 text-center text-2xl font-bold shadow-md">
+    Аномалии Lobotomy Corporation
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6">
+    <input
+      id="search"
+      type="text"
+      placeholder="Поиск аномалий..."
+      class="w-full p-2 mb-6 rounded bg-gray-800 text-white border border-gray-700"
+    />
+
+    <ul id="anomalyList" class="space-y-4">
+      <!-- Аномалии появятся здесь -->
+    </ul>
+  </main>
+
+  <script>
+    const anomalies = [
+      { name: "One Sin and Hundreds of Good Deeds", risk: "ZAYIN" },
+      { name: "Punishing Bird", risk: "TETH" },
+      { name: "The Forsaken Murderer", risk: "HE" },
+      { name: "Nothing There", risk: "ALEPH" },
+      { name: "The Naked Nest", risk: "WAW" },
+    ];
+
+    const list = document.getElementById("anomalyList");
+    const search = document.getElementById("search");
+
+    function renderList(filter = "") {
+      list.innerHTML = "";
+      anomalies
+        .filter(a => a.name.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(a => {
+          const li = document.createElement("li");
+          li.className = "p-4 bg-gray-800 rounded shadow";
+          li.innerHTML = `<h2 class="text-xl font-semibold">${a.name}</h2><p class="text-sm text-gray-400">Риск: ${a.risk}</p>`;
+          list.appendChild(li);
+        });
+    }
+
+    search.addEventListener("input", (e) => {
+      renderList(e.target.value);
+    });
+
+    renderList();
+  </script>
+</body>
+</html>
